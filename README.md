@@ -1,1 +1,1 @@
-# palm-line-recognition
+# Palm Line Recognition
