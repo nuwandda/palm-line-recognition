@@ -1,0 +1,9 @@
+torch
+torchvision
+scikit-image
+opencv-python
+pillow-heif
+mediapipe==0.10.9
+uvicorn
+fastapi
+python-multipart
