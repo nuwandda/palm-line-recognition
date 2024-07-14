@@ -1,4 +1,4 @@
-FROM nvidia/cuda:11.3.1-cudnn8-devel-ubuntu20.04
+FROM python:3.10
 
 WORKDIR /usr/app
 
@@ -13,7 +13,6 @@ RUN echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula selec
 RUN apt-get install -y git
 RUN apt install python3-pip -y
 RUN apt-get install git-lfs
-ENV LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/lib/python3.8/dist-packages/nvidia/cudnn/lib"
 
 COPY requirements.txt /usr/app/requirements.txt
 RUN pip install -r requirements.txt
