@@ -5,7 +5,8 @@ from palm_lines_recognition.model import *
 
 
 MODEL_PATH = 'palm_lines_recognition/weights/checkpoint_aug_epoch70.pth'
-device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+# device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+device = 'cpu'
 print('Using device for UNet model: ', device)
 net = UNet(n_channels=3, n_classes=1)
 net.load_state_dict(torch.load(MODEL_PATH, map_location=torch.device(device)))
