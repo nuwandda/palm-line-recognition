@@ -1,7 +1,8 @@
 torch
 torchvision
-scikit-image
-opencv-python
+scikit-image==0.21.0
+opencv-python==4.9.0.80
+numpy==1.26.2
 pillow-heif
 mediapipe==0.10.9
 uvicorn
