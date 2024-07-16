@@ -5,6 +5,7 @@ from typing import List
 
 class _RequestBase(_pydantic.BaseModel):
     resize_width: int = 256
+    hand_orientation: str = 'right'
 
 
 class PalmCreate(_RequestBase):

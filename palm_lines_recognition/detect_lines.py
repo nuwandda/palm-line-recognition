@@ -34,12 +34,12 @@ def run(path_to_input_image, resize_value, output_folder):
         lines = classify(path_to_palmline_image)
 
         # 4. Length measurement
-        im = measure(path_to_warped_image_mini, lines)
+        im, heart_line_length, head_line_length, life_line_length, line_descriptions = measure(path_to_warped_image_mini, lines)
 
         # 5. Save result
         im.save(path_to_result)
 
-        return path_to_result
+        return path_to_result, heart_line_length, head_line_length, life_line_length, line_descriptions
     
 
 if __name__ == '__main__':

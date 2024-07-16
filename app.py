@@ -26,7 +26,7 @@ async def root():
 async def generate_image(palmCreate: _schemas.PalmCreate = _fapi.Depends()):
     
     try:
-        image = await _services.recognize_palm_lines(palmCreate=palmCreate)
+        image, heart_line_length, head_line_length, life_line_length, line_descriptions = await _services.recognize_palm_lines(palmCreate=palmCreate)
     except Exception as e:
         print(traceback.format_exc())
         return {"message": f"{e.args}"}
@@ -36,7 +36,11 @@ async def generate_image(palmCreate: _schemas.PalmCreate = _fapi.Depends()):
     encoded_img = base64.b64encode(buffered.getvalue())
     payload = {
         "mime" : "image/jpg",
-        "image": encoded_img
+        "image": encoded_img,
+        "heart_line_length": heart_line_length,
+        "head_line_length": head_line_length,
+        "life_line_length": life_line_length,
+        "line_descriptions": line_descriptions
         }
     
     return payload

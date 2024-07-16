@@ -2,7 +2,7 @@ import schemas as _schemas
 import torch 
 import os
 # from dotenv import load_dotenv
-from PIL import Image
+from PIL import Image, ImageOps
 from io import BytesIO
 import numpy as np
 from pkg_resources import parse_version
@@ -32,9 +32,13 @@ async def recognize_palm_lines(palmCreate: _schemas.PalmCreate) -> Image:
     temp_id = str(uuid.uuid4())
     create_temp(temp_id)
     init_image = Image.open(BytesIO(base64.b64decode(palmCreate.encoded_base_img[0]))).save(TEMP_PATH + '/' + temp_id + '/input.jpg')
-    result_path = detect_lines.run(TEMP_PATH + '/' + temp_id + '/input.jpg', palmCreate.resize_width, TEMP_PATH + '/' + temp_id)
+    result_path, heart_line_length, head_line_length, life_line_length, line_descriptions = detect_lines.run(TEMP_PATH + '/' + temp_id + '/input.jpg', palmCreate.resize_width, TEMP_PATH + '/' + temp_id)
 
     return_image = Image.open(result_path)
+    if palmCreate.hand_orientation == 'right':
+        print('Flipping image...')
+        return_image = return_image.transpose(Image.FLIP_LEFT_RIGHT)
+
     delete_folder(temp_id)
     
-    return return_image
+    return return_image, heart_line_length, head_line_length, life_line_length, line_descriptions
